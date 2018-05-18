@@ -5,5 +5,5 @@ const recipeSchema = new mongoose.Schema({
     procedure :String,
     ingredient :String
 })
-mongoose.model('recipe',recipeSchema);
+mongoose.model('recipe', recipeSchema);
 module.exports = mongoose.model('recipe');
