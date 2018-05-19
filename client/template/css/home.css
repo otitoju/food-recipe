@@ -1,0 +1,73 @@
+.container{
+        background-image: url("images.jpg");
+        height: 350px;
+        width: 1250px; 
+        position: relative;
+      }
+      #register{
+        background: green;
+        width: 450px;
+        height: 45px;
+        border: none;
+        border-radius: 15px;
+        padding: 10px;
+        color: white;
+        font-size: 16px;
+        transition-duration: .5s;
+        margin-top: 15px;
+      }
+      #signin{
+         background: green;
+        width: 450px;
+        height: 45px;
+        border: none;
+        border-radius: 15px;
+        padding: 10px;
+        color: white;
+        font-size: 16px;
+        transition-duration: .5s;
+        margin-top: 15px;
+      }
+      #register:hover{
+        background: white;
+        border:1px solid green;
+        color: black;
+        cursor: pointer;
+      }
+      #signin:hover{
+        background: white;
+        border:1px solid green;
+        color: black;
+        cursor: pointer;  
+      }
+      h1{
+        text-align: center;
+      }
+      ul li{
+        list-style: none;
+        display:  inline;
+        padding: 20px;
+        font-family: sans-serif;
+
+      }
+     a{
+        text-decoration: none;
+      }
+      footer{
+        background: gray;
+        padding: 10px;
+        color: white;
+        font-size: 20px;
+        text-align: center;
+        font-style: italic;
+      }
+      .container #inside{
+        color: white;
+        padding: 150px;
+        font-size: 47px;
+        font-family: serif;
+      }
+      #wrapper{
+        text-align: center;
+        padding: 50px;
+      }
