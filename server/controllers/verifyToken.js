@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const config = require('./config');
+const config = require('../config');
 // VERFYING TOKEN
 exports.verifyToken = (req, res, next) => {
     const token = req.headers['x-access-token'];
@@ -17,10 +17,9 @@ exports.verifyToken = (req, res, next) => {
                 })
             }
             else{
-               req.userId = decoded.id
+               req.user = decoded
                next();
             }
         })
     }
 }
-module.exports = verifyToken;

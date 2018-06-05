@@ -55,3 +55,14 @@ exports.getSingleUser = async (req, res) => {
         })
     }
 }
+//DELETE A SINGLE USER 
+exports.deleteSingleUser = async (req, res) => {
+    const deleteUser = await user.findByIdAndRemove(req.params.id, (err, deleteUser) => {
+        if (err) {
+            res.json(`Unable to delete this user`)
+        }
+        else {
+            res.json(deleteUser); 
+        }
+    })
+}
