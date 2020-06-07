@@ -2,39 +2,27 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const Recipe = require('../models/recipe')
 //RETURN ALL RECIPES
-exports.getAllRecipees = (req, res) => {
-    Recipe.find({}, (err, recipe) => {
-        if(recipe){
-            res.json(recipe)
-        }
-    })
+exports.getAllRecipees = async (req, res) => {
+    const allRecipe = await Recipe.find()
+    res.json(allRecipe);
 }
-//RETURN A SINGLE RECIPE
-exports.getSingleRecipe = (req, res) => {
-   Recipe.findById(req.params.id, (err, recipe) => {
-       if(err)
-       return res.status(500).send('There is an error finding this recipe');
-       if(!recipe)
-       return res.status(404).send('Not found');
-       res.status(200).send(recipe)
-   }) 
-}
-//POST RECIPE
-exports.postRecipe = ( req, res) => {
-    Recipe.create({
-        foodName : req.body.foodName,
-        procedure : req.body.procedure,
-        ingredient : req.body.ingredient
-    },
-    (err, recipe) => {
-    if(err)
-    return res.status(500).send('Problem posting the recipe');
-    res.status(200).send(recipe)
-})
+//POST RECIPEs
+exports.postRecipe = async ( req, res) => {
+    let body = req.body;
+    if (!body.foodName && !body.procedure && !body.ingredient) {
+        res.json({
+            message:`Please fill all require input`
+        })
+    }
+    else {
+        let postRecipe = await Recipe.create(req.body)
+        res.json(postRecipe);
+    }
+   
 }
 //UPDATE RECIPE
 exports.updateRecipe = (req, res) => {
-    Recipe.findByIdAndUpdate(req.params.id,(err, recipe) => {
+    Recipe.findByIdAndUpdate(req.params.id, (err, recipe) => {
         if(err)
         return res.status(500).send('There is a problem updating this recipe');
         res.status(200).send(recipe)
@@ -42,9 +30,25 @@ exports.updateRecipe = (req, res) => {
 }
 //DELETE RECIPE
 exports.deleteRecipe = (req, res) => {
-    Recipe.findByIdAndRemove(req.params.id,(err, recipe) => {
+    Recipe.findByIdAndRemove(req.params.id, (err, recipe) => {
         if(err)
         return res.status(500).send('Unable to delete recipe');
-        res.status(200).send('You have successfully deleted ' + recipe)
+        res.status(200).send(recipe)
+    })
+}
+//FIND A SINGLE RECIPE
+exports.getSingleRecipe = async (req, res) => {
+    const singleRecipe = await Recipe.findById(req.params.id, (err, recipe) => {
+        if(!singleRecipe){
+            res.json({
+                message:`No recipe found`
+            })
+        }
+        else{
+            res.json({
+                message:`Recipe found`,
+                Recipe:singleRecipe
+            })
+        }
     })
 }
